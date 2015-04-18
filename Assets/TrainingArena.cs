@@ -25,10 +25,10 @@ public class TrainingArena : MonoBehaviour {
 
 	private void SpawnBall() {
 		GameObject newBall;
-		newBall =  (GameObject)Instantiate (ball, transform.position + new Vector3 ((Random.value - 0.5f) * 60f, 2.5f, (Random.value - 0.5f) * 60f), Quaternion.identity);
+		newBall =  (GameObject)Instantiate (ball, transform.position + new Vector3 ((Random.value - 0.5f) * 60f, 1f, (Random.value - 0.5f) * 60f), Quaternion.identity);
 		Rigidbody rb =  newBall.GetComponent<Rigidbody>();
 		Vector3 rot = new Vector3 (0f, Random.Range (-359, 359), 0f);
 		newBall.GetComponent<Transform> ().Rotate (rot);
-		rb.velocity = newBall.GetComponent<Transform> ().TransformDirection (Vector3.forward * 10f);
+		//rb.velocity = newBall.GetComponent<Transform> ().TransformDirection (Vector3.forward * 10f);
 	}
 }

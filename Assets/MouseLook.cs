@@ -28,7 +28,7 @@ public class MouseLook : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		Peck pecker = (Peck)transform.GetComponent<Peck>();
 
 		if (pecker && pecker.pecking) {

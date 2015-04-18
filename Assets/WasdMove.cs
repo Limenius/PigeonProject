@@ -13,7 +13,7 @@ public class WasdMove : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 
 		float speedPassed = Time.deltaTime;
 		if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))    transform.Translate(Vector3.forward *PIGEON_SPEED * speedPassed);

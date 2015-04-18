@@ -4,8 +4,8 @@ using System.Collections;
 public class Peck : MonoBehaviour {
 
 	public bool pecking = false;
-	public float peckDuration = 0.5f;
-	public float peckAngle = 45;
+	public float peckDuration = 0.1f;
+	public float peckAngle = 35;
 	
 	// Use this for initialization
 	void Start () {
@@ -13,10 +13,9 @@ public class Peck : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		float speedPassed = Time.deltaTime;
+	void FixedUpdate () {
 	
-		if (Input.GetKey(KeyCode.Q) && !pecking) StartCoroutine("PeckRoutine");
+		if (Input.GetKey(KeyCode.Mouse0) && !pecking) StartCoroutine("PeckRoutine");
 	
 	}
 
@@ -25,6 +24,7 @@ public class Peck : MonoBehaviour {
 		bool peckingPhase = true;
 		float time = 0;
 		float peckProgress = 0;
+		Vector3 initialPosition = transform.localPosition;
 
 		while (peckingPhase) {
 			peckProgress = time / peckDuration;
@@ -55,8 +55,12 @@ public class Peck : MonoBehaviour {
 			time += Time.deltaTime;
 		}
 
+		transform.localPosition = initialPosition;
+
 		pecking = false;
 
 	}
+
+
 
 }
