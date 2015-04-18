@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Peck : MonoBehaviour {
 
-	private bool pecking = false;
+	public bool pecking = false;
 	public float peckDuration = 0.5f;
 	public float peckAngle = 45;
 	
@@ -22,46 +22,40 @@ public class Peck : MonoBehaviour {
 
 	IEnumerator PeckRoutine() {
 		pecking = true;
+		bool peckingPhase = true;
 		float time = 0;
 		float peckProgress = 0;
 
-		while (pecking) {
+		while (peckingPhase) {
 			peckProgress = time / peckDuration;
-
 			if (peckProgress > 1)
 			{
-				pecking = false;
+				peckingPhase = false;
 				peckProgress = 1;
 			}
 
-			transform.RotateAround(transform.parent.transform.position, Vector3.right, (peckAngle / peckDuration) * Time.deltaTime);
-
-
+			transform.RotateAround(transform.parent.transform.position, transform.parent.transform.right, (peckAngle / peckDuration) * Time.deltaTime);
 			yield return null;
-
 			time += Time.deltaTime;
 		}
 
-		pecking = true;
+		peckingPhase = true;
 		time = 0;
 		peckProgress = 0;
 		
-		while (pecking) {
+		while (peckingPhase) {
 			peckProgress = time / peckDuration;
-			
 			if (peckProgress > 1)
 			{
-				pecking = false;
+				peckingPhase = false;
 				peckProgress = 1;
 			}
-			
-			transform.RotateAround(transform.parent.transform.position, Vector3.left, (peckAngle / peckDuration) * Time.deltaTime);
-			
-			
+			transform.RotateAround(transform.parent.transform.position, -transform.parent.transform.right, (peckAngle / peckDuration) * Time.deltaTime);
 			yield return null;
-			
 			time += Time.deltaTime;
 		}
+
+		pecking = false;
 
 	}
 

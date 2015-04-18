@@ -29,6 +29,11 @@ public class MouseLook : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		Peck pecker = (Peck)transform.GetComponent<Peck>();
+
+		if (pecker && pecker.pecking) {
+			return;
+		}
 		if (axes == RotationAxes.MouseXAndY)
 		{
 			// Read the mouse input axis

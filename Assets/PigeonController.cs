@@ -29,6 +29,11 @@ public class PigeonController : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
 	{
+		Peck pecker = (Peck)transform.GetComponent<Peck>();
+		Debug.Log (pecker.pecking);
+		if (pecker.pecking) {
+			return;
+		}
 		float speedPassed = Time.deltaTime;
 
 			
