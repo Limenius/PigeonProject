@@ -14,6 +14,7 @@ public class TrainingArena : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		Debug.Log (ApplicationModel.currentLevel);
 		SpawnBall ();
 		SpawnBall ();
 		SpawnBall ();
