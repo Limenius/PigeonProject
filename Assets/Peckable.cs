@@ -5,6 +5,9 @@ public class Peckable : MonoBehaviour {
 
 	private bool isAlive = true;
 
+	private Color color;
+	private string colorName;
+
 	// Use this for initialization
 	void Start () {
 
@@ -25,6 +28,10 @@ public class Peckable : MonoBehaviour {
 
 	void OnTriggerEnter(Collider __collider) {
 		if (__collider.gameObject.tag == "Head") {
+			TrainingArena ta = GameObject.FindWithTag("TrainingArena").GetComponent<TrainingArena>();
+			if (ta.isTarget(this.colorName)) {
+				Debug.Log ("GOOD");
+			}
 			//__collider.gameObject.GetComponent<Bullet>().Die();
 			GetComponent<AudioSource>().Play ();
 			isAlive = false;
@@ -32,5 +39,12 @@ public class Peckable : MonoBehaviour {
 			
 		}
 		
+	}
+
+	public void setColor(Color color, string colorName) {
+		this.color = color;
+		this.colorName = colorName;
+		this.GetComponent<Renderer>().material.color = color;
+
 	}
 }
