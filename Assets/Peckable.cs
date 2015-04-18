@@ -26,7 +26,6 @@ public class Peckable : MonoBehaviour {
 	void OnTriggerEnter(Collider __collider) {
 		if (__collider.gameObject.tag == "Head") {
 			//__collider.gameObject.GetComponent<Bullet>().Die();
-			Debug.Log ("HIT");
 			GetComponent<AudioSource>().Play ();
 			isAlive = false;
 			//Destroy ();

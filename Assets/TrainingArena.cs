@@ -7,6 +7,8 @@ public class TrainingArena : MonoBehaviour {
 
 	public GameObject ball;
 
+	private Color[] BallColors =  new Color[] { Color.blue, Color.red, Color.yellow };
+
 	// Use this for initialization
 	void Start () {
 		SpawnBall ();
@@ -29,6 +31,9 @@ public class TrainingArena : MonoBehaviour {
 		Rigidbody rb =  newBall.GetComponent<Rigidbody>();
 		Vector3 rot = new Vector3 (0f, Random.Range (-359, 359), 0f);
 		newBall.GetComponent<Transform> ().Rotate (rot);
+		newBall.GetComponent<Renderer>().material.color = BallColors[Random.Range(0,BallColors.Length)];;
 		//rb.velocity = newBall.GetComponent<Transform> ().TransformDirection (Vector3.forward * 10f);
 	}
+
+
 }
