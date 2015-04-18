@@ -5,6 +5,7 @@ public class PeckSim : MonoBehaviour {
 
 	private bool pecking = false;
 	public float peckDuration = 0.05f;
+	public bool wellTrained = true;
 
 	// Use this for initialization
 	void Start () {
@@ -71,6 +72,13 @@ public class PeckSim : MonoBehaviour {
 		transform.localPosition = initialPosition;
 		
 		pecking = false;
+
+		if (wellTrained) {
+			dir = targetShip.transform.position - transform.parent.transform.position;
+			transform.parent.transform.forward = dir;
+			Rigidbody rb = transform.parent.GetComponent<Rigidbody> ();
+			rb.velocity = this.transform.TransformDirection (Vector3.forward * 10f);
+		}
 		
 	}
 }
