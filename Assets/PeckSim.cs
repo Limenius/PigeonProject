@@ -9,9 +9,6 @@ public class PeckSim : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
-
-
 	}
 	
 	// Update is called once per frame
@@ -29,7 +26,11 @@ public class PeckSim : MonoBehaviour {
 		Vector3 targetPoint;
 
 		if (!wellTrained) {
-			targetPoint = transform.localPosition + new Vector3((Random.value - 0.5f) * 0.2f , (Random.value - 0.5f) * 0.2f, (Random.value - 0.5f) * 0.2f) + dir.normalized * 0.1f;
+			dir = transform.forward;
+
+			//targetPoint = transform.localPosition + transform.forward * 0.1f;
+			targetPoint = transform.localPosition + new Vector3((Random.value - 0.5f) * 0.05f , (Random.value - 0.5f) * 0.05f, (Random.value - 0.5f) * 0.05f) + dir.normalized * 0.1f;
+
 		} else {
 			targetPoint = transform.localPosition + dir.normalized * 0.1f;
 		}

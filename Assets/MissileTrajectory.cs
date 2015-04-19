@@ -4,10 +4,10 @@ using System.Collections;
 public class MissileTrajectory : MonoBehaviour {
 
 	private Vector3 dir;
+	public bool success;
 
 	// Use this for initialization
 	void Start () {
-
 
 		GameObject target = GameObject.FindWithTag("WarShip");
 		dir = target.transform.position - transform.position;
@@ -25,5 +25,19 @@ public class MissileTrajectory : MonoBehaviour {
 
 		rb.velocity = this.transform.TransformDirection (Vector3.forward * 10f);
 
+	}
+
+	public void SetSuccess(bool success) {
+		Debug.Log (success);
+		transform.FindChild ("Pigeon").GetComponent<PeckSim> ().wellTrained = success;
+			
+
+	}
+
+	void OnTriggerEnter(Collider __collider) {
+		WarSimulator ws = GameObject.FindWithTag("WarSimulator").GetComponent<WarSimulator>();
+		ws.NextPigeon();
+		UnityEngine.Object.Destroy(gameObject);
+		
 	}
 }
