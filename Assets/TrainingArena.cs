@@ -10,6 +10,8 @@ public class TrainingArena : MonoBehaviour {
 
 	public GameObject ball;
 
+	public Quaternion initialRotation;
+
 	public GameObject initialTimer;
 	public GameObject missionTimer;
 	public GameObject initialObjectives;
@@ -40,12 +42,8 @@ public class TrainingArena : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		Debug.Log (ApplicationModel.currentLevel);
-		SpawnBall ();
-		SpawnBall ();
-		SpawnBall ();
-		SpawnBall ();
-		SpawnBall ();
-		SpawnBall ();
+		SpawnBalls (10);
+
 		TargetColorName = BallColorNames [Random.Range (0, BallColors.Length)];
 		objectives.SetActive (false);
 		pigeonStatusHolder.SetActive (false);
@@ -54,6 +52,9 @@ public class TrainingArena : MonoBehaviour {
 		SpawnObjectivesSummary ();
 		SpawnObjectives ();
 		SpawnPigeons ();
+
+		initialRotation = GameObject.FindGameObjectWithTag ("Pigeon").transform.rotation;
+
 
 	}
 	
@@ -147,16 +148,25 @@ public class TrainingArena : MonoBehaviour {
 	}
 
 	private void NextPigeon() {
-		Pigeon pigeon = new Pigeon ();
-		string progressColor = "";
-		Color currentColor = pigeonsHuds [pigeonsHuds.Count - 1].transform.FindChild ("Progress").GetComponent<Image> ().color;
-		if (currentColor == Color.blue) progressColor = "blue";
-		if (currentColor == Color.red) progressColor = "red";
-		if (currentColor == Color.yellow) progressColor = "yellow";
-		pigeon.color = progressColor;
-		pigeon.trained = GetProgress ();
-		pigeons.Add (pigeon);
-		SpawnPigeon(pigeons.Count);
+		if (pigeons.Count < 4) {
+			Pigeon pigeon = new Pigeon ();
+			string progressColor = "";
+			Color currentColor = pigeonsHuds [pigeonsHuds.Count - 1].transform.FindChild ("Progress").GetComponent<Image> ().color;
+			if (currentColor == Color.blue)
+				progressColor = "blue";
+			if (currentColor == Color.red)
+				progressColor = "red";
+			if (currentColor == Color.yellow)
+				progressColor = "yellow";
+			pigeon.color = progressColor;
+			pigeon.trained = GetProgress ();
+			pigeons.Add (pigeon);
+			SpawnPigeon (pigeons.Count);
+			SpawnBalls (5);
+
+			GameObject.FindGameObjectWithTag("Pigeon").transform.position = new Vector3(0f, 0f, 0f);
+			GameObject.FindGameObjectWithTag("Pigeon").transform.rotation = initialRotation;
+		}
 	}
 
 	private void SetTrainingLevel(float progress) {
@@ -174,6 +184,12 @@ public class TrainingArena : MonoBehaviour {
 		case "yellow":
 			pigeonsHuds [pigeonsHuds.Count - 1].transform.FindChild ("Progress").GetComponent<Image> ().color = Color.yellow;
 			break;
+		}
+	}
+
+	private void SpawnBalls(int num) {
+		for (int i = 0; i< num; i++) {
+			SpawnBall ();
 		}
 	}
 
