@@ -26,8 +26,13 @@ public class PeckSim : MonoBehaviour {
 
 		Vector3 dir = targetShip.transform.position - transform.position;
 
-		Vector3 targetPoint = transform.localPosition + dir.normalized * 0.1f;
+		Vector3 targetPoint;
 
+		if (!wellTrained) {
+			targetPoint = transform.localPosition + new Vector3((Random.value - 0.5f) * 0.2f , (Random.value - 0.5f) * 0.2f, (Random.value - 0.5f) * 0.2f) + dir.normalized * 0.1f;
+		} else {
+			targetPoint = transform.localPosition + dir.normalized * 0.1f;
+		}
 	
 		transform.forward = dir;
 		pecking = true;
