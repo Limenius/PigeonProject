@@ -7,6 +7,8 @@ public class MissileTrajectory : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+
+
 		GameObject target = GameObject.FindWithTag("WarShip");
 		dir = target.transform.position - transform.position;
 		transform.forward = dir;

@@ -43,7 +43,6 @@ public class TrainingArena : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		Debug.Log (ApplicationModel.currentLevel);
 		SpawnBalls (10);
 
 		TargetColorName = BallColorNames [Random.Range (0, BallColors.Length)];
@@ -73,7 +72,11 @@ public class TrainingArena : MonoBehaviour {
 			missionTimer.SetActive (true);
 			missionTimer.GetComponent<Text> ().text = (missionTime - (elapsedTime - summaryTime)).ToString ("n0");
 			if (Input.GetKeyUp(KeyCode.N) ) NextPigeon();
+		}
 
+		if (missionTime - (elapsedTime - summaryTime) <= 0f) {
+			ApplicationModel.pigeons = pigeons;
+			Application.LoadLevel("WarSimulator");
 		}
 	}
 
