@@ -68,6 +68,7 @@ public class TrainingArena : MonoBehaviour {
 			pigeonStatusHolder.SetActive(true);
 			missionTimer.SetActive (true);
 			missionTimer.GetComponent<Text> ().text = (missionTime - (elapsedTime - summaryTime)).ToString ("n0");
+			if (Input.GetKeyUp(KeyCode.N) ) NextPigeon();
 
 		}
 	}
@@ -132,16 +133,30 @@ public class TrainingArena : MonoBehaviour {
 	}
 
 	private void SpawnPigeons() {
-		SpawnPigeon (currentPigeon);
+		SpawnPigeon (pigeons.Count);
 	}
 
-	private void SpawnPigeon(Pigeon pigeon) {
+	private void SpawnPigeon(int num) {
 		GameObject ps = (GameObject)GameObject.Instantiate (pigeonStatus);
-		ps.transform.position = new Vector3 (50f, 530f, 0f);
+		ps.transform.position = new Vector3 ((num * 100f) + 50f, 530f, 0f);
 		ps.transform.SetParent (pigeonStatusHolder.transform);
+		ps.transform.FindChild ("Text").GetComponent<Text> ().text = "Pigeon " + (num + 1);
 		pigeonsHuds.Add (ps);
 		SetTrainingLevel(0f);
 		SetTrainingColor ("blue");
+	}
+
+	private void NextPigeon() {
+		Pigeon pigeon = new Pigeon ();
+		string progressColor = "";
+		Color currentColor = pigeonsHuds [pigeonsHuds.Count - 1].transform.FindChild ("Progress").GetComponent<Image> ().color;
+		if (currentColor == Color.blue) progressColor = "blue";
+		if (currentColor == Color.red) progressColor = "red";
+		if (currentColor == Color.yellow) progressColor = "yellow";
+		pigeon.color = progressColor;
+		pigeon.trained = GetProgress ();
+		pigeons.Add (pigeon);
+		SpawnPigeon(pigeons.Count);
 	}
 
 	private void SetTrainingLevel(float progress) {
