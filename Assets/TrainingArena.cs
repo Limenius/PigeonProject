@@ -33,6 +33,8 @@ public class TrainingArena : MonoBehaviour {
 	public GameObject redship;
 	public GameObject yellowship;
 
+	public bool playing = false;
+
 	private List<string> objectiveList = new List<string> ();
 
 	private List<Pigeon> pigeons = new List<Pigeon> ();
@@ -64,6 +66,7 @@ public class TrainingArena : MonoBehaviour {
 		if (elapsedTime < summaryTime) {
 			initialTimer.GetComponent<Text> ().text = (summaryTime - elapsedTime).ToString ("n0");
 		} else {
+			playing = true;
 			initialObjectives.SetActive(false);
 			objectives.SetActive (true);
 			pigeonStatusHolder.SetActive(true);

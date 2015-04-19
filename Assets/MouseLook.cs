@@ -31,6 +31,10 @@ public class MouseLook : MonoBehaviour {
 	void FixedUpdate () {
 		Peck pecker = (Peck)transform.GetComponent<Peck>();
 
+		if (! GameObject.FindGameObjectWithTag ("TrainingArena").GetComponent <TrainingArena> ().playing) {
+			return;
+		}
+
 		if (pecker && pecker.pecking) {
 			return;
 		}

@@ -14,14 +14,12 @@ public class WasdMove : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-
-		float speedPassed = Time.deltaTime;
-		if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))    transform.Translate(Vector3.forward *PIGEON_SPEED * speedPassed);
-		if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))  transform.Translate(Vector3.back * PIGEON_SPEED * speedPassed);
-		if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))  transform.Translate(Vector3.left * PIGEON_SPEED * speedPassed);
-		if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) transform.Translate(Vector3.right * PIGEON_SPEED * speedPassed);
-
-
-	
+		if (GameObject.FindGameObjectWithTag ("TrainingArena").GetComponent <TrainingArena>().playing) {
+			float speedPassed = Time.deltaTime;
+			if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))    transform.Translate(Vector3.forward *PIGEON_SPEED * speedPassed);
+			if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))  transform.Translate(Vector3.back * PIGEON_SPEED * speedPassed);
+			if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))  transform.Translate(Vector3.left * PIGEON_SPEED * speedPassed);
+			if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) transform.Translate(Vector3.right * PIGEON_SPEED * speedPassed);
+		}
 	}
 }
