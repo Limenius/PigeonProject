@@ -29,9 +29,7 @@ public class Peckable : MonoBehaviour {
 	void OnTriggerEnter(Collider __collider) {
 		if (__collider.gameObject.tag == "Head") {
 			TrainingArena ta = GameObject.FindWithTag("TrainingArena").GetComponent<TrainingArena>();
-			if (ta.isTarget(this.colorName)) {
-				Debug.Log ("GOOD");
-			}
+			ta.peckedOn(colorName);
 			//__collider.gameObject.GetComponent<Bullet>().Die();
 			GetComponent<AudioSource>().Play ();
 			isAlive = false;

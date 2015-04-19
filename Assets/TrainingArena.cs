@@ -140,11 +140,15 @@ public class TrainingArena : MonoBehaviour {
 		ps.transform.position = new Vector3 (50f, 530f, 0f);
 		ps.transform.SetParent (pigeonStatusHolder.transform);
 		pigeonsHuds.Add (ps);
-		SetTrainingLevel("blue", 90f);
+		SetTrainingLevel(0f);
+		SetTrainingColor ("blue");
 	}
 
-	private void SetTrainingLevel(string color, float progress) {
+	private void SetTrainingLevel(float progress) {
 		pigeonsHuds [pigeonsHuds.Count - 1].transform.FindChild ("Progress").GetComponent<RectTransform> ().sizeDelta = new Vector2 ((progress * 75f) / 100f, 20f);
+	}
+
+	private void SetTrainingColor(string color) {
 		switch (color) {
 		case "blue":
 			pigeonsHuds [pigeonsHuds.Count - 1].transform.FindChild ("Progress").GetComponent<Image> ().color = Color.blue;
@@ -170,6 +174,44 @@ public class TrainingArena : MonoBehaviour {
 
 
 		//rb.velocity = newBall.GetComponent<Transform> ().TransformDirection (Vector3.forward * 10f);
+	}
+
+	public void peckedOn(string color) {
+		float progress = GetProgress();
+		string progressColor = "";
+		Color currentColor = pigeonsHuds [pigeonsHuds.Count - 1].transform.FindChild ("Progress").GetComponent<Image> ().color;
+		if (currentColor == Color.blue) progressColor = "blue";
+		if (currentColor == Color.red) progressColor = "red";
+		if (currentColor == Color.yellow) progressColor = "yellow";
+			
+		Debug.Log (progressColor);
+		if (progress <= 0f || progressColor == color) {
+			IncrementProgress();
+			SetTrainingColor (color);
+		} else {
+			DiminishProgress();
+		}
+	}
+
+	public float GetProgress() {
+		return pigeonsHuds [pigeonsHuds.Count - 1].transform.FindChild ("Progress").GetComponent<RectTransform> ().sizeDelta.x * 100f / 75f;
+	}
+
+	public void IncrementProgress() {
+		float progress = GetProgress ();
+		float delta = 100f - progress;
+		SetTrainingLevel (progress + delta / 2);
+	}
+
+	public void DiminishProgress() {
+		float progress = GetProgress ();
+		float delta = 100f - progress;
+		if (progress - delta < 0f) {
+			SetTrainingLevel (0f);
+		} else {
+			SetTrainingLevel (progress - delta);
+		}
+
 	}
 
 	public bool isTarget(string name) {

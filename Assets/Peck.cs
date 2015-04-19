@@ -20,6 +20,9 @@ public class Peck : MonoBehaviour {
 	}
 
 	IEnumerator PeckRoutine() {
+		TrainingArena ta = GameObject.FindWithTag("TrainingArena").GetComponent<TrainingArena>();
+		float initProgress = ta.GetProgress ();
+
 		pecking = true;
 		bool peckingPhase = true;
 		float time = 0;
@@ -59,6 +62,9 @@ public class Peck : MonoBehaviour {
 
 		pecking = false;
 
+		if (initProgress == ta.GetProgress ()) {
+			ta.DiminishProgress();
+		}
 	}
 
 
