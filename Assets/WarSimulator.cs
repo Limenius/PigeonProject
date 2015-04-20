@@ -9,31 +9,32 @@ public class WarSimulator : MonoBehaviour {
 	public GameObject HUD;
 	public GameObject pigeonStatus;
 	public GameObject missilePrefab;
+	public GameObject ship;
 	private GameObject pigeonStatusDisplay;
 	public int currentPigeon = 0;
 
 	// Use this for initialization
 	void Start () {
-		Pigeon p1 = new Pigeon ();
-		p1.color = "blue";
-		p1.trained = 99f;
-		ApplicationModel.pigeons.Add (p1);
-		Pigeon p2 = new Pigeon ();
-		p2.color = "red";
-		p2.trained = 99f;
-		ApplicationModel.pigeons.Add (p2);
-		Pigeon p3 = new Pigeon ();
-		p3.color = "red";
-		p3.trained = 99f;
-		ApplicationModel.pigeons.Add (p3);
-		Pigeon p4 = new Pigeon ();
-		p4.color = "yellow";
-		p4.trained = 1f;
-		ApplicationModel.pigeons.Add (p4);
-		Pigeon p5 = new Pigeon ();
-		p5.color = "blue";
-		p5.trained = 99f;
-		ApplicationModel.pigeons.Add (p5);
+//		Pigeon p1 = new Pigeon ();
+//		p1.color = "blue";
+//		p1.trained = 99f;
+//		ApplicationModel.pigeons.Add (p1);
+//		Pigeon p2 = new Pigeon ();
+//		p2.color = "red";
+//		p2.trained = 99f;
+//		ApplicationModel.pigeons.Add (p2);
+//		Pigeon p3 = new Pigeon ();
+//		p3.color = "red";
+//		p3.trained = 99f;
+//		ApplicationModel.pigeons.Add (p3);
+//		Pigeon p4 = new Pigeon ();
+//		p4.color = "yellow";
+//		p4.trained = 1f;
+//		ApplicationModel.pigeons.Add (p4);
+//		Pigeon p5 = new Pigeon ();
+//		p5.color = "blue";
+//		p5.trained = 99f;
+//		ApplicationModel.pigeons.Add (p5);
 		SpawnPigeon(currentPigeon);
 	}
 	
@@ -59,6 +60,18 @@ public class WarSimulator : MonoBehaviour {
 		} else {
 			ApplicationModel.pigeons[num].succesful = false;
 			success = false;
+		}
+
+		switch (pigeon.color) {
+		case "blue":
+			ship.GetComponent<Renderer>().material.color = Color.blue;
+			break;
+		case "red":
+			ship.GetComponent<Renderer>().material.color = Color.red;
+			break;
+		case "yellow":
+			ship.GetComponent<Renderer>().material.color = Color.yellow;
+			break;
 		}
 		LaunchMissile (success);
 	}

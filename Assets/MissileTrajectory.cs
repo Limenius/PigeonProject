@@ -6,6 +6,10 @@ public class MissileTrajectory : MonoBehaviour {
 	private Vector3 dir;
 	public bool success;
 
+	public GameObject splash;
+	public GameObject explossion;
+
+
 	// Use this for initialization
 	void Start () {
 
@@ -28,14 +32,19 @@ public class MissileTrajectory : MonoBehaviour {
 	}
 
 	public void SetSuccess(bool success) {
-		Debug.Log (success);
 		transform.FindChild ("Pigeon").GetComponent<PeckSim> ().wellTrained = success;
+		this.success = success;
 			
 
 	}
 
 	void OnTriggerEnter(Collider __collider) {
 		WarSimulator ws = GameObject.FindWithTag("WarSimulator").GetComponent<WarSimulator>();
+		if (!success) {
+			GameObject.Instantiate (splash);
+		} else {
+			GameObject.Instantiate (explossion);
+		}
 		ws.NextPigeon();
 		UnityEngine.Object.Destroy(gameObject);
 		

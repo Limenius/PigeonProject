@@ -15,6 +15,8 @@ public class RecapController : MonoBehaviour {
 	public GameObject sRedPrefab;
 	public GameObject sYellowPrefab;
 
+	public GameObject stampPrefab;
+
 	public GameObject targetMissed;
 	public GameObject targetEliminated;
 
@@ -54,11 +56,11 @@ public class RecapController : MonoBehaviour {
 //		p3.succesful = true;
 //		pigeons.Add (p3);
 //
-		objectiveList.Add ("red");
-		objectiveList.Add ("red");
-		objectiveList.Add ("blue");
-		objectiveList.Add ("blue");
-		objectiveList.Add ("yellow");
+//		objectiveList.Add ("red");
+//		objectiveList.Add ("red");
+//		objectiveList.Add ("blue");
+//		objectiveList.Add ("blue");
+//		objectiveList.Add ("yellow");
 	}
 	
 	// Update is called once per frame
@@ -138,6 +140,8 @@ public class RecapController : MonoBehaviour {
 			yield return null;
 			elapsedTime += Time.deltaTime;
 		}
+
+		GameObject.Instantiate (stampPrefab);
 
 		mSuccess.SetActive (result);
 		mFailed.SetActive (!result);
