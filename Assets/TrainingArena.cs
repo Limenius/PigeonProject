@@ -86,9 +86,7 @@ public class TrainingArena : MonoBehaviour {
 			this.objectiveList.Add(BallColorNames[idxColor]);
 		}
 		this.objectiveList.Sort();
-		for (int i = 0; i < 5; i ++) {
-			Debug.Log (this.objectiveList[i]);
-		}
+		ApplicationModel.objectiveList = objectiveList;
 	}
 
 	private void SpawnObjectivesSummary () {

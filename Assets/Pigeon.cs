@@ -5,5 +5,6 @@ public class Pigeon {
 
 	public string color;
 	public float trained = 0f;
+	public bool succesful = false;
 
 }

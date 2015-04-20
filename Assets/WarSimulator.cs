@@ -14,14 +14,14 @@ public class WarSimulator : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		Pigeon p1 = new Pigeon ();
-		p1.color = "blue";
-		p1.trained = 8f;
-		ApplicationModel.pigeons.Add (p1);
-		Pigeon p2 = new Pigeon ();
-		p2.color = "red";
-		p2.trained = 50f;
-		ApplicationModel.pigeons.Add (p2);
+//		Pigeon p1 = new Pigeon ();
+//		p1.color = "blue";
+//		p1.trained = 8f;
+//		ApplicationModel.pigeons.Add (p1);
+//		Pigeon p2 = new Pigeon ();
+//		p2.color = "red";
+//		p2.trained = 50f;
+//		ApplicationModel.pigeons.Add (p2);
 		SpawnPigeon(currentPigeon);
 	}
 	
@@ -43,8 +43,10 @@ public class WarSimulator : MonoBehaviour {
 
 		bool success = false;
 		if (Random.value * 100f < pigeon.trained) {
+			ApplicationModel.pigeons[num].succesful = true;
 			success = true;
 		} else {
+			ApplicationModel.pigeons[num].succesful = false;
 			success = false;
 		}
 		LaunchMissile (success);
