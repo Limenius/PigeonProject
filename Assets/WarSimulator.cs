@@ -124,7 +124,7 @@ public class WarSimulator : MonoBehaviour {
 
 	void SetTrainingLevel(float trained) {
 		pigeonStatusDisplay.transform.FindChild ("Progress").GetComponent<RectTransform> ().sizeDelta = new Vector2 ((trained * 75f) / 100f, 20f);
-		pigeonStatusDisplay.transform.FindChild ("Accuracy").GetComponent<Text> ().text = "Accuracy: " + trained + "%";
+		pigeonStatusDisplay.transform.FindChild ("Accuracy").GetComponent<Text> ().text = "Accuracy: " + trained.ToString("n0") + "%";
 
 	}
 

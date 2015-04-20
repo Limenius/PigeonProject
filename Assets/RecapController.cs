@@ -20,6 +20,8 @@ public class RecapController : MonoBehaviour {
 	public GameObject targetMissed;
 	public GameObject targetEliminated;
 
+	public GameObject playagainButton;
+
 	private float startTime;
 	public float resultTime = 0.5f;
 	public float stepTime = 0.5f;
@@ -37,6 +39,7 @@ public class RecapController : MonoBehaviour {
 		startTime = Time.time;
 		mFailed.SetActive (false);
 		mSuccess.SetActive (false);
+		playagainButton.SetActive(false);
 
 		pigeons = ApplicationModel.pigeons;
 		objectiveList = ApplicationModel.objectiveList;
@@ -111,6 +114,15 @@ public class RecapController : MonoBehaviour {
 		}
 	}
 
+	public void PlayAgain() {
+		ApplicationModel.pigeons = new List<Pigeon> ();
+		ApplicationModel.objectiveList = new List<string> ();
+		GameObject.Destroy(GameObject.FindWithTag("DestroyRestart"));
+
+		Application.LoadLevel("trainingarena");
+
+	}
+
 	IEnumerator CheckRoutine(bool result, int step) {
 
 		float elapsedTime = 0;
@@ -145,6 +157,8 @@ public class RecapController : MonoBehaviour {
 
 		mSuccess.SetActive (result);
 		mFailed.SetActive (!result);
+		playagainButton.SetActive(true);
+
 
 	}
 }

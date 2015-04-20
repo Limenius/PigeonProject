@@ -54,6 +54,7 @@ public class TrainingArena : MonoBehaviour {
 		SpawnObjectives ();
 		SpawnPigeons ();
 
+		startTime = Time.time;
 		initialRotation = GameObject.FindGameObjectWithTag ("Pigeon").transform.rotation;
 
 
@@ -75,6 +76,7 @@ public class TrainingArena : MonoBehaviour {
 		}
 
 		if (missionTime - (elapsedTime - summaryTime) <= 0f) {
+			StorePigeon ();
 			ApplicationModel.pigeons = pigeons;
 			Application.LoadLevel("WarSimulator");
 		}
@@ -153,18 +155,8 @@ public class TrainingArena : MonoBehaviour {
 
 	private void NextPigeon() {
 		if (pigeons.Count < 4) {
-			Pigeon pigeon = new Pigeon ();
-			string progressColor = "";
-			Color currentColor = pigeonsHuds [pigeonsHuds.Count - 1].transform.FindChild ("Progress").GetComponent<Image> ().color;
-			if (currentColor == Color.blue)
-				progressColor = "blue";
-			if (currentColor == Color.red)
-				progressColor = "red";
-			if (currentColor == Color.yellow)
-				progressColor = "yellow";
-			pigeon.color = progressColor;
-			pigeon.trained = GetProgress ();
-			pigeons.Add (pigeon);
+			StorePigeon();
+
 			SpawnPigeon (pigeons.Count);
 			SpawnBalls (5);
 
@@ -173,6 +165,21 @@ public class TrainingArena : MonoBehaviour {
 		}
 	}
 
+	private void StorePigeon() {
+		Pigeon pigeon = new Pigeon ();
+		string progressColor = "";
+		Color currentColor = pigeonsHuds [pigeonsHuds.Count - 1].transform.FindChild ("Progress").GetComponent<Image> ().color;
+		if (currentColor == Color.blue)
+			progressColor = "blue";
+		if (currentColor == Color.red)
+			progressColor = "red";
+		if (currentColor == Color.yellow)
+			progressColor = "yellow";
+		pigeon.color = progressColor;
+		pigeon.trained = GetProgress ();
+		pigeons.Add (pigeon);
+	}
+	
 	private void SetTrainingLevel(float progress) {
 		pigeonsHuds [pigeonsHuds.Count - 1].transform.FindChild ("Progress").GetComponent<RectTransform> ().sizeDelta = new Vector2 ((progress * 75f) / 100f, 20f);
 	}
