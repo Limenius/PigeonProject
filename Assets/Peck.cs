@@ -64,6 +64,7 @@ public class Peck : MonoBehaviour {
 
 		if (initProgress == ta.GetProgress ()) {
 			ta.DiminishProgress();
+			GetComponent<AudioSource>().Play();
 		}
 	}
 

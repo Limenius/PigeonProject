@@ -230,7 +230,8 @@ public class TrainingArena : MonoBehaviour {
 		rb.velocity = newBall.GetComponent<Transform> ().TransformDirection (Vector3.forward * 10f);
 	}
 
-	public void peckedOn(string color) {
+	public bool peckedOn(string color) {
+		bool learning = false;
 		float progress = GetProgress();
 		string progressColor = "";
 		Color currentColor = pigeonsHuds [pigeonsHuds.Count - 1].transform.FindChild ("Progress").GetComponent<Image> ().color;
@@ -241,10 +242,13 @@ public class TrainingArena : MonoBehaviour {
 		Debug.Log (progressColor);
 		if (progress <= 0f || progressColor == color) {
 			IncrementProgress();
+			learning = true;
 			SetTrainingColor (color);
 		} else {
 			DiminishProgress();
+			GetComponent<AudioSource>().Play();
 		}
+		return learning;
 	}
 
 	public float GetProgress() {
