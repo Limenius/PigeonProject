@@ -87,7 +87,7 @@ public class TrainingArena : MonoBehaviour {
 		ApplicationModel.pigeons = pigeons;
 		Cursor.lockState = UnityEngine.CursorLockMode.None;
 		Cursor.visible = true;
-		Application.LoadLevel("WarSimulator");
+		Application.LoadLevel("Intermission");
 
 	}
 	
