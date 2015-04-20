@@ -4,7 +4,7 @@ using System.Collections;
 public class Intermission : MonoBehaviour {
 
 	private float startTime = 0f;
-	public float intermissionTime = 5f;
+	public float intermissionTime = 3f;
 
 	// Use this for initialization
 	void Start () {

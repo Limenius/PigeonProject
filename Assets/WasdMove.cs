@@ -3,7 +3,7 @@ using System.Collections;
 
 public class WasdMove : MonoBehaviour {
 
-	private const int PIGEON_SPEED = 50;
+	public int PIGEON_SPEED = 50;
 
 	private Vector3 moveDirection = Vector3.zero;
 

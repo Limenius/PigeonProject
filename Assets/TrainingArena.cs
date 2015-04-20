@@ -18,6 +18,7 @@ public class TrainingArena : MonoBehaviour {
 	public GameObject objectives;
 	public GameObject pigeonStatusHolder;
 	public GameObject pigeonStatus;
+	public GameObject keysHolder;
 
 	private Color[] BallColors =  new Color[] { Color.blue, Color.red, Color.yellow };
 	private string[] BallColorNames =  new string[] { "blue", "red", "yellow" };
@@ -48,6 +49,7 @@ public class TrainingArena : MonoBehaviour {
 		TargetColorName = BallColorNames [Random.Range (0, BallColors.Length)];
 		objectives.SetActive (false);
 		pigeonStatusHolder.SetActive (false);
+		keysHolder.SetActive (false);
 		missionTimer.SetActive (false);
 		ChooseObjectives ();
 		SpawnObjectivesSummary ();
@@ -70,6 +72,7 @@ public class TrainingArena : MonoBehaviour {
 			initialObjectives.SetActive(false);
 			objectives.SetActive (true);
 			pigeonStatusHolder.SetActive(true);
+			keysHolder.SetActive(true);
 			missionTimer.SetActive (true);
 			missionTimer.GetComponent<Text> ().text = (missionTime - (elapsedTime - summaryTime)).ToString ("n0");
 			if (Input.GetKeyUp(KeyCode.N) ) NextPigeon();
@@ -224,7 +227,7 @@ public class TrainingArena : MonoBehaviour {
 		newBall.GetComponent<Peckable> ().setColor (BallColors [idxColor], BallColorNames [idxColor]);
 
 
-		//rb.velocity = newBall.GetComponent<Transform> ().TransformDirection (Vector3.forward * 10f);
+		rb.velocity = newBall.GetComponent<Transform> ().TransformDirection (Vector3.forward * 10f);
 	}
 
 	public void peckedOn(string color) {
