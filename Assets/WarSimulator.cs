@@ -10,8 +10,12 @@ public class WarSimulator : MonoBehaviour {
 	public GameObject pigeonStatus;
 	public GameObject missilePrefab;
 	public GameObject ship;
+	public GameObject transition;
 	private GameObject pigeonStatusDisplay;
 	public int currentPigeon = 0;
+	public float transitionTime = 0.5f;
+	public float finalTransitionTime = 1.5f;
+
 
 	// Use this for initialization
 	void Start () {
@@ -36,6 +40,7 @@ public class WarSimulator : MonoBehaviour {
 //		p5.trained = 99f;
 //		ApplicationModel.pigeons.Add (p5);
 		SpawnPigeon(currentPigeon);
+		transition.SetActive (false);
 	}
 	
 	private void SpawnPigeon(int num) {
@@ -79,11 +84,42 @@ public class WarSimulator : MonoBehaviour {
 	public void NextPigeon() {
 		currentPigeon ++;
 		if (currentPigeon == ApplicationModel.pigeons.Count) {
-			Application.LoadLevel ("recap");
+			StartCoroutine("FinalTransitionRoutine");
 		} else {
-			SpawnPigeon (currentPigeon);
+			StartCoroutine("TransitionRoutine");
 		}
+	}
 
+	IEnumerator TransitionRoutine() {
+		transition.SetActive (true);
+
+		float elapsedTime = 0;
+		
+		while (elapsedTime < transitionTime) {
+			yield return null;
+			elapsedTime += Time.deltaTime;
+		}
+		transition.SetActive (false);
+
+		SpawnPigeon (currentPigeon);
+		yield return null;
+	}
+
+	
+	IEnumerator FinalTransitionRoutine() {
+		transition.SetActive (true);
+		
+		float elapsedTime = 0;
+		
+		while (elapsedTime < finalTransitionTime) {
+			yield return null;
+			elapsedTime += Time.deltaTime;
+		}
+		transition.SetActive (false);
+
+		Application.LoadLevel ("recap");
+
+		yield return null;
 	}
 
 	void SetTrainingLevel(float trained) {
