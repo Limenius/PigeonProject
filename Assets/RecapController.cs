@@ -118,7 +118,8 @@ public class RecapController : MonoBehaviour {
 		ApplicationModel.pigeons = new List<Pigeon> ();
 		ApplicationModel.objectiveList = new List<string> ();
 		GameObject.Destroy(GameObject.FindWithTag("DestroyRestart"));
-
+		Cursor.lockState = UnityEngine.CursorLockMode.Locked;
+		Cursor.visible = false;
 		Application.LoadLevel("trainingarena");
 
 	}

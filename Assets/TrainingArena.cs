@@ -73,17 +73,24 @@ public class TrainingArena : MonoBehaviour {
 			missionTimer.SetActive (true);
 			missionTimer.GetComponent<Text> ().text = (missionTime - (elapsedTime - summaryTime)).ToString ("n0");
 			if (Input.GetKeyUp(KeyCode.N) ) NextPigeon();
+			if (Input.GetKeyUp (KeyCode.R)) Application.LoadLevel("trainingarena");
+			if (Input.GetKeyUp (KeyCode.F)) FinishTraining();
 		}
 
 		if (missionTime - (elapsedTime - summaryTime) <= 0f) {
-			StorePigeon ();
-			ApplicationModel.pigeons = pigeons;
-			Cursor.lockState = UnityEngine.CursorLockMode.None;
-			Cursor.visible = true;
-			Application.LoadLevel("WarSimulator");
+			FinishTraining ();
 		}
 	}
 
+	private void FinishTraining() {
+		StorePigeon ();
+		ApplicationModel.pigeons = pigeons;
+		Cursor.lockState = UnityEngine.CursorLockMode.None;
+		Cursor.visible = true;
+		Application.LoadLevel("WarSimulator");
+
+	}
+	
 	private void ChooseObjectives() {
 		for (int i = 0; i < 5; i ++) {
 			int idxColor = Random.Range (0, BallColors.Length);
