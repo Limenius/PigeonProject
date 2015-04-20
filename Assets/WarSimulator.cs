@@ -14,14 +14,26 @@ public class WarSimulator : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-//		Pigeon p1 = new Pigeon ();
-//		p1.color = "blue";
-//		p1.trained = 8f;
-//		ApplicationModel.pigeons.Add (p1);
-//		Pigeon p2 = new Pigeon ();
-//		p2.color = "red";
-//		p2.trained = 50f;
-//		ApplicationModel.pigeons.Add (p2);
+		Pigeon p1 = new Pigeon ();
+		p1.color = "blue";
+		p1.trained = 99f;
+		ApplicationModel.pigeons.Add (p1);
+		Pigeon p2 = new Pigeon ();
+		p2.color = "red";
+		p2.trained = 99f;
+		ApplicationModel.pigeons.Add (p2);
+		Pigeon p3 = new Pigeon ();
+		p3.color = "red";
+		p3.trained = 99f;
+		ApplicationModel.pigeons.Add (p3);
+		Pigeon p4 = new Pigeon ();
+		p4.color = "yellow";
+		p4.trained = 1f;
+		ApplicationModel.pigeons.Add (p4);
+		Pigeon p5 = new Pigeon ();
+		p5.color = "blue";
+		p5.trained = 99f;
+		ApplicationModel.pigeons.Add (p5);
 		SpawnPigeon(currentPigeon);
 	}
 	
@@ -36,7 +48,6 @@ public class WarSimulator : MonoBehaviour {
 
 		pigeonStatusDisplay = ps;
 
-		Debug.Log (ApplicationModel.pigeons.Count);
 		Pigeon pigeon = ApplicationModel.pigeons [num];
 		SetTrainingLevel(pigeon.trained);
 		SetTrainingColor (pigeon.color);
@@ -54,7 +65,11 @@ public class WarSimulator : MonoBehaviour {
 
 	public void NextPigeon() {
 		currentPigeon ++;
-		SpawnPigeon (currentPigeon);
+		if (currentPigeon == ApplicationModel.pigeons.Count) {
+			Application.LoadLevel ("recap");
+		} else {
+			SpawnPigeon (currentPigeon);
+		}
 
 	}
 

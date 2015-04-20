@@ -24,11 +24,11 @@ public class RecapController : MonoBehaviour {
 
 	private int step = 0;
 	
-
+	public int missionsAccomplished = 0;
 	public bool finished = false;
 
-	static public List<Pigeon> pigeons = new List<Pigeon>();
-	static public List<string> objectiveList = new List<string>();
+	public List<Pigeon> pigeons = new List<Pigeon>();
+	public List<string> objectiveList = new List<string>();
 
 	// Use this for initialization
 	void Start () {
@@ -36,21 +36,24 @@ public class RecapController : MonoBehaviour {
 		mFailed.SetActive (false);
 		mSuccess.SetActive (false);
 
-		Pigeon p1 = new Pigeon ();
-		p1.color = "blue";
-		p1.succesful = true;
-		pigeons.Add (p1);
+		pigeons = ApplicationModel.pigeons;
+		objectiveList = ApplicationModel.objectiveList;
 
-		Pigeon p2 = new Pigeon ();
-		p2.color = "blue";
-		p2.succesful = false;
-		pigeons.Add (p2);
-
-		Pigeon p3 = new Pigeon ();
-		p3.color = "yellow";
-		p3.succesful = true;
-		pigeons.Add (p3);
-
+//		Pigeon p1 = new Pigeon ();
+//		p1.color = "blue";
+//		p1.succesful = true;
+//		pigeons.Add (p1);
+//
+//		Pigeon p2 = new Pigeon ();
+//		p2.color = "blue";
+//		p2.succesful = false;
+//		pigeons.Add (p2);
+//
+//		Pigeon p3 = new Pigeon ();
+//		p3.color = "yellow";
+//		p3.succesful = true;
+//		pigeons.Add (p3);
+//
 		objectiveList.Add ("red");
 		objectiveList.Add ("red");
 		objectiveList.Add ("blue");
@@ -72,6 +75,7 @@ public class RecapController : MonoBehaviour {
 			for (i = 0; i < pigeons.Count; i ++) {
 				if (pigeons[i].color == color && pigeons[i].succesful) {
 					found = true;
+					missionsAccomplished ++;
 					break;
 				}
 			}
@@ -99,7 +103,7 @@ public class RecapController : MonoBehaviour {
 			StartCoroutine(CheckRoutine(found, step));
 			step++;
 			if (step == objectiveList.Count) {
-				StartCoroutine(StampRoutine(true));
+				StartCoroutine(StampRoutine(missionsAccomplished == 5));
 				finished = true;
 			}
 		}
@@ -135,7 +139,8 @@ public class RecapController : MonoBehaviour {
 			elapsedTime += Time.deltaTime;
 		}
 
-		mSuccess.SetActive (true);
+		mSuccess.SetActive (result);
+		mFailed.SetActive (!result);
 
 	}
 }
