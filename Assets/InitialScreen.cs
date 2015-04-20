@@ -50,6 +50,8 @@ public class InitialScreen : MonoBehaviour {
 	}
 
 	public void StartGame() {
+		Cursor.lockState = UnityEngine.CursorLockMode.Locked;
+		Cursor.visible = false;
 		Application.LoadLevel("trainingarena");
 	}
 }

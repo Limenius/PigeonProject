@@ -78,6 +78,8 @@ public class TrainingArena : MonoBehaviour {
 		if (missionTime - (elapsedTime - summaryTime) <= 0f) {
 			StorePigeon ();
 			ApplicationModel.pigeons = pigeons;
+			Cursor.lockState = UnityEngine.CursorLockMode.None;
+			Cursor.visible = true;
 			Application.LoadLevel("WarSimulator");
 		}
 	}
